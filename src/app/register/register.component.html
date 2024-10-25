@@ -45,13 +45,13 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
-                I agree to the <a href="#">terms</a>
+               I agree to the <a href="#">terms</a>
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button  [routerLink]="['/login']" routerLinkActive="router-link-active"  class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -69,9 +69,10 @@
         </a>
       </div>
 
-      <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="text-center">I already have a membership</a>
+      <a [routerLink]="['/login']" routerLinkActive="router-link-active" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
+
