@@ -66,16 +66,15 @@
         </li>
         <li class="nav-item">
           <a [routerLink]="['/mahasiswa']" routerLinkActive="router-link-active" class="nav-link {{(moduleName == 'mahasiswa') ? 'active' : ''}}">
-            <i class="fas fa-graduation-cap"></i>
+            <i class="px-1 fas fa-graduation-cap"></i>
             <p>Mahasiswa</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
+          <a href="/mahasiswa" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
-              Widgets
-              <span class="right badge badge-danger">New</span>
+              Mahasiswa (Non-router)
             </p>
           </a>
         </li>
