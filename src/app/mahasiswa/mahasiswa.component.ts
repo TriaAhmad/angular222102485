@@ -23,6 +23,7 @@ export class MahasiswaComponent implements AfterViewInit {
       this.renderer.removeClass(document.body, "sidebar-open");
       this.renderer.addClass(document.body, "sidebar-closed");
       this.renderer.addClass(document.body, "sidebar-collapsed");
+      
       this.table1 = $("#table1").DataTable();
       this.bindMahasiswa();
   }
