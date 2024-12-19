@@ -18,20 +18,11 @@ export class MahasiswaComponent implements AfterViewInit {
   table1: any;
 
   constructor(private HttpClient : HttpClient, private renderer: Renderer2){}
-<<<<<<< HEAD
     
     ngAfterViewInit(): void {
       this.renderer.removeClass(document.body, "sidebar-open");
       this.renderer.addClass(document.body, "sidebar-closed");
-      this.renderer.addClass(document.body, "sidebar-collapse");
-=======
-
-    ngAfterViewInit(): void {
-      this.renderer.removeClass(document.body, "sidebar-open");
-      this.renderer.addClass(document.body, "sidebar-closed");
       this.renderer.addClass(document.body, "sidebar-collapsed");
-      
->>>>>>> 09f935ca135a4775cd8d92a01b400b69fe3dca07
       this.table1 = $("#table1").DataTable();
       this.bindMahasiswa();
   }
@@ -74,11 +65,7 @@ export class MahasiswaComponent implements AfterViewInit {
     var tahunMasuk = $("#tahunMasukText").val();
     var tanggalLahir = $("#tanggalLahirText").val();
     var tempatLahir = $("#tempatLahirText").val();
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 09f935ca135a4775cd8d92a01b400b69fe3dca07
     if (nim.length == 0) {
     alert("NIM belum diisi");
     return;
@@ -113,11 +100,7 @@ export class MahasiswaComponent implements AfterViewInit {
     tanggalLahir = encodeURIComponent(tanggalLahir);
     tempatLahir = encodeURIComponent(tempatLahir);
 
-<<<<<<< HEAD
     var url = "https://stmikpontianak.cloud/011100862/tambahMahasiswa.php" + 
-=======
-    var url = "https://stmikpontianak.cloud/011100862/tambahMahasiswa.php" +
->>>>>>> 09f935ca135a4775cd8d92a01b400b69fe3dca07
       "?alamat=" + alamat +
       "&jenisKelamin=" + jenisKelamin +
       "&jp=" + jp +
