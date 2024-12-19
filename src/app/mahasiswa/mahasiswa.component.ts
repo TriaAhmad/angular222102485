@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Renderer2 } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
-import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from "../header/header.component";
+import { SidebarComponent } from "../sidebar/sidebar.component";
+import { FooterComponent } from "../footer/footer.component";
 import { HttpClient } from '@angular/common/http';
 
 declare const $: any;
@@ -16,24 +16,24 @@ declare const $: any;
 export class MahasiswaComponent implements AfterViewInit {
   data: any;
   table1: any;
-  constructor(private httpClient: HttpClient, private renderer: Renderer2) {}
-  ngAfterViewInit(): void {
-    this.renderer.removeClass(document.body,"sidebar-open");
-    this.renderer.addClass(document.body,"sidebar-closed");
-    this.renderer.addClass(document.body,"sidebar-collapse");
 
-    this.table1 = $("#table1").DataTable();
-    this.bindMahasiswa();
+  constructor(private HttpClient : HttpClient, private renderer: Renderer2){}
+    
+    ngAfterViewInit(): void {
+      this.renderer.removeClass(document.body, "sidebar-open");
+      this.renderer.addClass(document.body, "sidebar-closed");
+      this.renderer.addClass(document.body, "sidebar-collapse");
+      this.table1 = $("#table1").DataTable();
+      this.bindMahasiswa();
   }
 
-  bindMahasiswa(): void {
-    this.httpClient.get("https://stmikpontianak.cloud/011100862/tampilMahasiswa.php").subscribe((data: any) => {
+  bindMahasiswa(): void{
+    this.HttpClient.get('https://stmikpontianak.cloud/011100862/tampilMahasiswa.php').subscribe((data: any) => {
       console.log(data);
+
       this.table1.clear();
-
-      data.forEach((element: any) => {
-        var tempatTanggalLahir = element.TempatLahir + "," + element.TempatLahir;
-
+      data.forEach((element : any) => {
+        var tempatTanggalLahir = element.TempatLahir + ", " + element.TanggalLahir;
         var row = [
           element.NIM,
           element.Nama,
@@ -44,58 +44,52 @@ export class MahasiswaComponent implements AfterViewInit {
           element.StatusNikah,
           element.TahunMasuk
         ]
+
         this.table1.row.add(row);
       });
-
+      
       this.table1.draw(false);
     });
   }
-
-  showTambahModal():void {
+  showTambahModal(): void{
     $("#tambahModal").modal();
-  }
 
-  postRecord():void{
+  }
+  postRecord(): void{
     var alamat = $("#alamatText").val();
-    var jenisKelamin = $("#jenisKelaminText").val();
+    var jenisKelamin = $("#jenisKelaminSelect").val();
     var jp = $("#jpSelect").val();
-    var nama = $("#namaText").val();
+    var nama = $("#namaText") .val();
     var nim = $("#nimText").val();
     var statusNikah = $("#statusNikahSelect").val();
     var tahunMasuk = $("#tahunMasukText").val();
     var tanggalLahir = $("#tanggalLahirText").val();
     var tempatLahir = $("#tempatLahirText").val();
-
-    if (nim.length == 0){
-      alert("NIM Belum Diisi");
+    
+    if (nim.length == 0) {
+    alert("NIM belum diisi");
+    return;
+    }
+    if (nama.length == 0) {
+    alert("Nama belum diisi");
+    return;
+    }
+    if (tempatLahir.length == 0) {
+    alert("Tempat lahir belum diisi");
+    return;
+    }
+    if (tanggalLahir.length == 0) {
+      alert("Tanggal lahir belum diisi");
       return;
     }
-
-    if (nama.length == 0){
-      alert("Nama Belum Diisi");
+    if (alamat.length == 0) {
+      alert("alamat belum diisi");
       return;
     }
-
-    if (tempatLahir.length == 0){
-      alert("Tempat Lahir Belum Diisi");
+    if (tahunMasuk.length == 0) {
+      alert("Tahun masuk belum diisi");
       return;
     }
-
-    if (tanggalLahir.length == 0){
-      alert("Tanggal Lahir Belum Diisi");
-      return;
-    }
-
-    if (alamat.length == 0){
-      alert("Alamat Belum Diisi");
-      return;
-    }
-
-    if (tahunMasuk.length == 0){
-      alert("Tahun Masuk Belum Diisi");
-      return;
-    }
-
     alamat = encodeURIComponent(alamat);
     jenisKelamin = encodeURIComponent(jenisKelamin);
     jp = encodeURIComponent(jp);
@@ -106,24 +100,22 @@ export class MahasiswaComponent implements AfterViewInit {
     tanggalLahir = encodeURIComponent(tanggalLahir);
     tempatLahir = encodeURIComponent(tempatLahir);
 
-    var url = "https://stmikpontianak.cloud/011100862/tampilMahasiswa.php" +
-    "?alamat=" + alamat +
-    "&jenisKelamin=" + jenisKelamin +
-    "&jp=" + jp +
-    "&nama=" + nama +
-    "&nim=" + nim +
-    "&statusPernikahan=" + statusNikah +
-    "&tahunMasuk=" + tahunMasuk +
-    "&tanggalLahir=" + tanggalLahir +
-    "&tempatLahir=" + tempatLahir;
-
-    this.httpClient.get(url)
-    .subscribe((data:any) => {
-      console.log(data);
-      alert(data.status + "-->" + data.message);
-
-      this.bindMahasiswa();
-      $("#tambahModal").modal("hide");
-    });
+    var url = "https://stmikpontianak.cloud/011100862/tambahMahasiswa.php" + 
+      "?alamat=" + alamat +
+      "&jenisKelamin=" + jenisKelamin +
+      "&jp=" + jp +
+      "&nama=" + nama +
+      "&nim=" + nim +
+      "&statusPernikahan=" + statusNikah +
+      "&tahunMasuk=" + tahunMasuk +
+      "&tanggalLahir=" + tanggalLahir +
+      "&tempatLahir=" + tempatLahir;
+    this.HttpClient.get(url)
+      .subscribe((data: any) => {
+        console.log(data);
+        alert(data.status + " --> " + data.message);
+        this.bindMahasiswa();
+        $("#tambahModal").modal("hide");
+      });
   }
 }
