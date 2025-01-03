@@ -9,6 +9,7 @@ import { Dashboard3Component } from './dashboard3/dashboard3.component';
 import { MahasiswaComponent } from './mahasiswa/mahasiswa.component';
 import { otentikasiGuard } from './otentikasi.guard';
 import { LogoutComponent } from './logout/logout.component';
+import { ForexComponent } from './forex/forex.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
   {path: "register",component: RegisterComponent},
   {path: "login",component: LoginComponent},
   {path: "mahasiswa",component: MahasiswaComponent, canActivate: [otentikasiGuard]},
+  {path: "forex",component: ForexComponent, canActivate: [otentikasiGuard]},
   { path: "logout", component: LogoutComponent},
 ];
 
