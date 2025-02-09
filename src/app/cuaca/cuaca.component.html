@@ -2,7 +2,7 @@
     <app-header></app-header>
     <app-sidebar moduleName="cuaca"></app-sidebar>
 
-    
+
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -27,12 +27,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="form-group">
-                        <input 
-                        type="text"
-                        class="form-control"
-                        placeholder="City name...."
-                        (keydown.enter)="handleEnter($event)"
-                        >
+                        <input type="text" class="form-control" placeholder="City name...."
+                            (keydown.enter)="handleEnter($event)">
                     </div>
                     <div class="table-responsive">
                         <table id="table1" class="table table-hover table-bordered table-striped">

@@ -14,7 +14,7 @@ declare const moment: any;
   templateUrl: './cuaca.component.html',
   styleUrls: ['./cuaca.component.css']
 })
-export class CuacaComponent implements  AfterViewInit {
+export class CuacaComponent implements AfterViewInit {
   private table1: any;
   constructor(private renderer: Renderer2, private http: HttpClient) { }
 
@@ -58,50 +58,50 @@ export class CuacaComponent implements  AfterViewInit {
         });
   }
 
-  getData(city: string): void{
+  getData(city: string): void {
     city = encodeURIComponent(city);
 
     this.http
-    .get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=d219424c8188579492a9e6af91d16740`)
-    .subscribe((data: any) => {
-      let list = data.list;
-      console.log(data);
+      .get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=d219424c8188579492a9e6af91d16740`)
+      .subscribe((data: any) => {
+        let list = data.list;
+        console.log(data);
 
-      this.table1.clear();
+        this.table1.clear();
 
-      list.forEach((element: any) => {
-        const weather = element.weather[0];
-        console.log(weather);
+        list.forEach((element: any) => {
+          const weather = element.weather[0];
+          console.log(weather);
 
-        const iconUrl = "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png";
-        const cuacaDeskripsi = weather.main + "||" + weather.description;
+          const iconUrl = "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png";
+          const cuacaDeskripsi = weather.main + "||" + weather.description;
 
-        const main = element.main;
-        console.log(main);
+          const main = element.main;
+          console.log(main);
 
-        const tempMin = this.kelvinToCelcius(main.temp_min);
-        console.log("tempMin : " + tempMin);
+          const tempMin = this.kelvinToCelcius(main.temp_min);
+          console.log("tempMin : " + tempMin);
 
-        const tempMax = this.kelvinToCelcius(main.temp_max);
-        console.log("tempMax : " + tempMax);
+          const tempMax = this.kelvinToCelcius(main.temp_max);
+          console.log("tempMax : " + tempMax);
 
-        const temp = tempMin + "℃ - " + tempMax + "℃";
+          const temp = tempMin + "℃ - " + tempMax + "℃";
 
-        const row = [
-          element.dt_txt,
-          iconUrl,
-          cuacaDeskripsi,
-          temp
-        ]
+          const row = [
+            element.dt_txt,
+            iconUrl,
+            cuacaDeskripsi,
+            temp
+          ]
 
-        this.table1.row.add(row);
+          this.table1.row.add(row);
+        });
+        this.table1.draw(false);
+      }, (error: any) => {
+        alert(error.error.message);
+        this.table1.clear();
+        this.table1.draw(false);
       });
-      this.table1.draw(false);
-    }, (error: any) => {
-      alert(error.error.message);
-      this.table1.clear();
-      this.table1.draw(false);
-    });
   }
 
 
@@ -112,13 +112,13 @@ export class CuacaComponent implements  AfterViewInit {
   }
 
   handleEnter(event: any) {
-    const  cityName = event.target.value;
-    if(cityName == ""){
+    const cityName = event.target.value;
+    if (cityName == "") {
       this.table1.clear();
       this.table1.draw(false);
     }
 
     this.getData(cityName);
-  } 
+  }
 
 }
